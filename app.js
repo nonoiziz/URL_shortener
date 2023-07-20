@@ -1,21 +1,20 @@
+const { engine } = require('express-handlebars')
 const express = require('express')
 const app = express();
 const port = 3000
 
 
-import express from 'express';
-import { engine } from 'express-handlebars';
 
 
-
+app.engine('.hbs', engine({extname: '.hbs'}))
 app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
+app.set('view engine', '.hbs');
 app.set('views', './views');
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
     res.render('home');
 });
-
 
 app.listen(port, () => {
   console.log(`express server is running on http://localhost:${port}`)
